@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import ValidationError
+from rest_framework import status
 
 
 from .models import Users
@@ -25,12 +26,11 @@ class SignUpSzer(serializers.ModelSerializer):
         email_exists = Users.objects.filter(email=attrs["email"]).exists()
 
         if email_exists:
-            raise ValidationError("El Correo ya se encuentra en uso")
+            raise ValidationError({"response":"email se encuentra en uso","status":status.HTTP_200_OK})
         return super().validate(attrs)
 
     def create(self, validated_data):
         password = validated_data.pop("password")
-
         user = super().create(validated_data)
         user.set_password(password)
         user.save()
