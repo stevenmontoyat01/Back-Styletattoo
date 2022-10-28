@@ -32,8 +32,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "tatto",
     "accounts",
-
-
     "rest_framework",
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
@@ -59,11 +57,13 @@ REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': "error",
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication'
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated' 
     )
-    # ,'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated' )
 }
 
 TEMPLATES = [
@@ -93,7 +93,7 @@ DATABASES = {
         #Dairon
         #default = 'mysql://root:123456@localhost:3306/styletattoo',
         #Steven
-        #default = 'mysql://root:@localhost:3306/styletattoo',
+        default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
     )
 }
@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-col'
 
 TIME_ZONE = 'UTC'
 
