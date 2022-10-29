@@ -26,7 +26,7 @@ class SignUpSzer(serializers.ModelSerializer):
         email_exists = Users.objects.filter(email=attrs["email"]).exists()
 
         if email_exists:
-            raise ValidationError({"response":"email se encuentra en uso","status":status.HTTP_200_OK})
+            raise ValidationError({"response":"email se encuentra en uso","status":status.HTTP_400_BAD_REQUEST})
         return super().validate(attrs)
 
     def create(self, validated_data):
