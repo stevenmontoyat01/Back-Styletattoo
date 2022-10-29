@@ -23,7 +23,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'jazzmin',
-
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,12 +41,28 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    'http://127.0.0.1:3000',
+]
+
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 ROOT_URLCONF = "styletatto.urls"
@@ -91,9 +107,9 @@ WSGI_APPLICATION = "styletatto.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         #Dairon
-        #default = 'mysql://root:123456@localhost:3306/styletattoo',
+        default = 'mysql://root:123456@localhost:3306/styletattoo',
         #Steven
-        default = 'mysql://root:@localhost:3306/styletattoo',
+        # default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
     )
 }
