@@ -1,3 +1,4 @@
+from unittest.util import _MAX_LENGTH
 from django.db import models
 
 from django.contrib.auth.base_user import BaseUserManager
@@ -38,7 +39,7 @@ class Users(AbstractUser):
     last_name = models.CharField(max_length=45)
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=90 ,unique=True)
-    image = models.ImageField()
+    image = models.CharField(max_length=100)
     cellPhone = models.CharField(max_length=15)
     rol = models.CharField(max_length=20)
     is_active= models.CharField(default=1, max_length=1)
