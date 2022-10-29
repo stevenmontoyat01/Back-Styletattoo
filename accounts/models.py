@@ -38,14 +38,15 @@ class Users(AbstractUser):
     last_name = models.CharField(max_length=45)
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=90 ,unique=True)
-    image = models.ImageField(default='https://i.postimg.cc/T2N5CnwK/perfil-Usuario-Anonim.png',)
+    image = models.ImageField(default='',)
+    cellPhone = models.CharField(max_length=15)
     rol = models.CharField(max_length=20)
     is_active= models.CharField(default=1, max_length=1)
 
 
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username","first_name","last_name","rol"]
+    REQUIRED_FIELDS = ["username","first_name","last_name","cellPhone","rol"]
 
 
     def __str__(self):
