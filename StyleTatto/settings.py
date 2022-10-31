@@ -6,6 +6,7 @@ from django.conf.global_settings import LANGUAGES
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -35,7 +36,9 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
-    'colorfield'
+    'colorfield',
+    'django_rest_passwordreset',
+
 ]
 
 MIDDLEWARE = [
@@ -107,7 +110,7 @@ WSGI_APPLICATION = "styletatto.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         #Dairon
-        #default = 'mysql://root:123456@localhost:3306/styletattoo',
+        default = 'mysql://root:123456@localhost:3306/styletattoo',
         #Steven
         #default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
@@ -147,6 +150,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

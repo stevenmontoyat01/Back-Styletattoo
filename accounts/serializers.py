@@ -7,6 +7,9 @@ from rest_framework import status
 
 from .models import Users
 
+
+from rest_framework import serializers
+
 #_____________________________________________#
 # || R E G I S T R O  ||   U S U A R I O S  ||
 class SignUpSzer(serializers.ModelSerializer):
@@ -15,7 +18,6 @@ class SignUpSzer(serializers.ModelSerializer):
     last_name = serializers.CharField(max_length=45)
     email = serializers.CharField(max_length=90)
     password = serializers.CharField(min_length=8, write_only=True)
-
 
 
     class Meta:
@@ -39,3 +41,10 @@ class SignUpSzer(serializers.ModelSerializer):
 
         return user
     
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = Users
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
