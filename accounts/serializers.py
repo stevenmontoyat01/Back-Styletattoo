@@ -51,3 +51,14 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 class GetInformation(serializers.Serializer):
     model = (Users)
+
+
+
+
+class GetUsers(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = '__all__'
+
+
+

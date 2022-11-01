@@ -12,8 +12,20 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 from django.views.generic import View
-from .serializers import ChangePasswordSerializer
+from rest_framework.generics import RetrieveAPIView
+from .serializers import ChangePasswordSerializer,GetUsers
 from .models import Users
+
+
+   #API GET DATA USERS
+class UserRetrieveAPIView(RetrieveAPIView):
+    queryset = Users.objects.all()
+    serializer_class = GetUsers 
+    permission_classes = (IsAuthenticated,)
+    
+    def get_object(self):
+        return self.request.user
+
 
 class signUpView(generics.GenericAPIView):
     permission_classes = []
