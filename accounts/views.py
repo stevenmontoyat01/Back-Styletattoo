@@ -1,3 +1,4 @@
+import string
 from django.shortcuts import render
 from .serializers import SignUpSzer
 
@@ -49,15 +50,24 @@ class Login(APIView):
             tokens = create_jwt_pair_for_user(user)
 
             info_user={
+                "id": user.id,
+                "first_name":user.first_name,
+                "last_name":user.last_name,
+                "cellphone":user.cellPhone,
+                "image":user.image,
                 "rol":user.rol,
                 "activate":user.is_active,
+            }
+
+            authentication = {
+                "jwt" : tokens,
                 "token":user.auth_token.key,
             }
 
             response = {
                 "message" : "login sucessful",
                 "info":info_user,
-                "jwt" : tokens
+                "authentication":authentication
             }
             return Response(data = response, status = status.HTTP_200_OK)
         else:
@@ -105,5 +115,9 @@ class ChangePasswordView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class Users_id(APIView):
+    permission_classes = []
 
-
+    def get(self,request:Request,token_id:string):
+        user = self.request
+        print (user)

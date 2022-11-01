@@ -50,7 +50,7 @@ class Users(AbstractUser):
     image = models.CharField(max_length=100)
     cellPhone = models.CharField(max_length=15)
     rol = models.CharField(max_length=20)
-    is_active= models.CharField(default=1, max_length=1)
+    is_active= models.BooleanField(default=True)
 
 
     objects = CustomUserManager()

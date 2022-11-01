@@ -1,3 +1,3 @@
 ---------------------------------**INSTRUCIONES**------------------------------------------
 
-- CAMBIAR NOMBRE DE PROYECTO StyleTatto por styletatto
+- CAMBIAR NOMBRE DEl PROYECTO StyleTatto por styletatto
