@@ -54,6 +54,7 @@ class Login(APIView):
                 "first_name":user.first_name,
                 "last_name":user.last_name,
                 "cellphone":user.cellPhone,
+                "email":user.email,
                 "image":user.image,
                 "rol":user.rol,
                 "activate":user.is_active,
