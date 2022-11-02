@@ -54,18 +54,17 @@ class Login(APIView):
     def post(self, request:Request):
         email = request.data.get('email')
         password = request.data.get('password')
-        print(email)
+        
         user = authenticate(email=email,password=password)
 
 
         if user is not None:
             tokens = create_jwt_pair_for_user(user)
-
+            
             info_user={
                 "id": user.id,
                 "first_name":user.first_name,
                 "last_name":user.last_name,
-                "cellphone":user.cellPhone,
                 "email":user.email,
                 "image":user.image,
                 "rol":user.rol,
@@ -77,12 +76,36 @@ class Login(APIView):
                 "token":user.auth_token.key,
             }
 
-            response = {
+            briefcase = {
+                "departament":user.departament,
+                "city":user.city,
+                "description":user.description,
+                "direction":user.direction
+            }
+
+            if user.rol.upper() == "USER":
+
+                response = {
                 "message" : "login sucessful",
                 "info":info_user,
                 "authentication":authentication
-            }
-            return Response(data = response, status = status.HTTP_200_OK)
+                }
+
+                return Response(data = response, status = status.HTTP_200_OK)
+
+            elif user.rol.upper() == "ARTIST":
+
+                response = {
+                "message" : "login sucessful",
+                "info": {"info_user":info_user,"briefcase":briefcase},
+                "authentication":authentication
+                }
+
+                return Response(data = response, status = status.HTTP_200_OK)
+
+            else:
+
+                return Response(data= "error en tipo de usuario", status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response(data = {"messsage":"email o password invalido"},status=status.HTTP_401_UNAUTHORIZED)
 

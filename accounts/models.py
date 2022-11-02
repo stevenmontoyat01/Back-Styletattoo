@@ -42,24 +42,28 @@ class CustomUserManager(BaseUserManager):
 
 
 class Users(AbstractUser):
-    username = models.CharField(max_length=45)
+    username = models.CharField(max_length=20)
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=90 ,unique=True)
     image = models.CharField(max_length=100)
-    cellPhone = models.CharField(max_length=15)
+    departament = models.CharField(max_length =20, null=True)
+    city = models.CharField(max_length = 20, null = True)
+    description = models.CharField(max_length = 100, null = True)
+    experience = models.CharField(max_length = 3, null = True)
+    direction = models.CharField(max_length = 100, null = True)
     rol = models.CharField(max_length=20)
     is_active= models.BooleanField(default=True)
 
 
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username","first_name","last_name","cellPhone","rol","image"]
+    REQUIRED_FIELDS = ["username","first_name","last_name","rol","image"]
 
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 @receiver(reset_password_token_created)
