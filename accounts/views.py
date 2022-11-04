@@ -83,7 +83,7 @@ class Login(APIView):
                 "direction":user.direction
             }
 
-            if user.rol.upper() == "USER":
+            if user.rol.upper() == "[ROLE_USUARIO]":
 
                 response = {
                 "message" : "login sucessful",
@@ -93,7 +93,7 @@ class Login(APIView):
 
                 return Response(data = response, status = status.HTTP_200_OK)
 
-            elif user.rol.upper() == "ARTIST":
+            elif user.rol.upper() == "[ROLE_ARTISTA]":
 
                 response = {
                 "message" : "login sucessful",
