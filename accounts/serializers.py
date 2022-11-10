@@ -5,6 +5,7 @@ from rest_framework.validators import ValidationError
 from rest_framework import status
 
 
+
 from .models import Users
 
 
@@ -58,7 +59,9 @@ class GetInformation(serializers.Serializer):
 class GetUsers(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = '__all__'
-
-
+        fields = ['id', 'username', 'lastname', 'image']
+        
+    username = serializers.CharField(max_length=45)
+    last_name = serializers.CharField(max_length=45)
+   
 

@@ -47,7 +47,7 @@ class Users(AbstractUser):
     last_name = models.CharField(max_length=45)
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=90 ,unique=True)
-    image = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="images", null=True)
     departament = models.CharField(max_length =20, null=True)
     city = models.CharField(max_length = 20, null = True)
     description = models.CharField(max_length = 100, null = True)
