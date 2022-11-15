@@ -54,11 +54,15 @@ class GetInformation(serializers.Serializer):
 
 
 
-
 class GetUsers(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = '__all__'
 
+class CurrentUserTattoSerializer(serializers.ModelSerializer):
+    PerfilProfesional = serializers.StringRelatedField(many = True)
 
+    class Meta:
+        model = Users
+        fields = '__all__'
 

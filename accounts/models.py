@@ -48,11 +48,6 @@ class Users(AbstractUser):
     password = models.CharField(max_length=100)
     email = models.CharField(max_length=90 ,unique=True)
     image = models.CharField(max_length=100)
-    departament = models.CharField(max_length =20, null=True)
-    city = models.CharField(max_length = 20, null = True)
-    description = models.CharField(max_length = 100, null = True)
-    experience = models.CharField(max_length = 3, null = True)
-    direction = models.CharField(max_length = 100, null = True)
     rol = models.CharField(max_length=20)
     is_active= models.BooleanField(default=True)
 

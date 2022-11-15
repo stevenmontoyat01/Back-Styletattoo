@@ -2,7 +2,7 @@ import string
 from django.shortcuts import render
 from .serializers import SignUpSzer
 
-from rest_framework import generics, status
+from rest_framework import status,generics,mixins
 from rest_framework.response import Response
 from rest_framework.request import Request 
 from rest_framework.views import APIView
@@ -76,36 +76,14 @@ class Login(APIView):
                 "token":user.auth_token.key,
             }
 
-            briefcase = {
-                "departament":user.departament,
-                "city":user.city,
-                "description":user.description,
-                "direction":user.direction
-            }
-
-            if user.rol.upper() == "[ROLE_USUARIO]":
-
-                response = {
+            response = {
                 "message" : "login sucessful",
                 "info":info_user,
                 "authentication":authentication
-                }
+            }
 
-                return Response(data = response, status = status.HTTP_200_OK)
+            return Response(data = response, status = status.HTTP_200_OK)
 
-            elif user.rol.upper() == "[ROLE_ARTISTA]":
-
-                response = {
-                "message" : "login sucessful",
-                "info": {"info_user":info_user,"briefcase":briefcase},
-                "authentication":authentication
-                }
-
-                return Response(data = response, status = status.HTTP_200_OK)
-
-            else:
-
-                return Response(data= "error en tipo de usuario", status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response(data = {"messsage":"email o password invalido"},status=status.HTTP_401_UNAUTHORIZED)
 
@@ -151,9 +129,15 @@ class ChangePasswordView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Users_id(APIView):
-    permission_classes = []
 
-    def get(self,request:Request,token_id:string):
-        user = self.request
-        print (user)
+class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,):
+    serializer_class = GetUsers
+    queryset = Users.objects.all()
+
+
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def post(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
