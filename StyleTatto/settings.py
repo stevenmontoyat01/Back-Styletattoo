@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "tatto",
     "accounts",
+    "quotes",
     "rest_framework",
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
@@ -109,9 +110,9 @@ WSGI_APPLICATION = "styletatto.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         #Dairon
-        default = 'mysql://root:123456@localhost:3306/styletattoo',
+    #   default = 'mysql://root:123456@localhost:3306/styletattoo',  
         #Steven
-        #default = 'mysql://root:@localhost:3306/styletattoo',
+        default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
     )
 }
@@ -273,3 +274,7 @@ JAZZMIN_SETTINGS = {
     # (deben estar presentes en archivos estáticos) "custom_css": None,
     "custom_js": None,
 }    
+
+# donde se almacenan los archivos
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
