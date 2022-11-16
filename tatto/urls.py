@@ -7,5 +7,4 @@ urlpatterns = [
     path("<int:pk>/", views.ProfileTUoploadteAndDelete.as_view(), name="ProfileTUoploadteAndDelete"),
     path("perfilProfesional/", views.perfilProfesional, name="perfilProfesional"),
 
- 
 ]

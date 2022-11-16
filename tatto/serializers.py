@@ -7,6 +7,7 @@ from . import models
 
 
 class PostArtist(serializers.ModelSerializer):
+
     class Meta:
         model = models.Tattoo_artist
         fields = '__all__'

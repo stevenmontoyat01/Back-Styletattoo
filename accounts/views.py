@@ -134,7 +134,6 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     serializer_class = GetUsers
     queryset = Users.objects.all()
 
-
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
     
