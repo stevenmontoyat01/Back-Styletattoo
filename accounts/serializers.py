@@ -70,3 +70,13 @@ class CurrentUserTattoSerializer(serializers.ModelSerializer):
         fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
 
 
+
+
+class allinfo(serializers.ModelSerializer):
+    PerfilProfesional = PostArtist(many=True)
+
+    class Meta:
+        model = Users
+        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
+
+

@@ -19,7 +19,6 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     serializer_class = PostArtist
     queryset = Tattoo_artist.objects.all()
 
-
     def perform_create(self,serializer):
         user = self.request.user
         serializer.save(artist=user)
@@ -60,3 +59,7 @@ def perfilProfesional(request: Request):
     serializer = CurrentUserTattoSerializer(instance=user)
 
     return Response(data= serializer.data, status=status.HTTP_200_OK)
+
+
+
+

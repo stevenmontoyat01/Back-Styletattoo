@@ -9,11 +9,12 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from .tokens import create_jwt_pair_for_user
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
 
 # Create your views here.
 from django.views.generic import View
 from rest_framework.generics import RetrieveAPIView
-from .serializers import ChangePasswordSerializer,GetUsers
+from .serializers import ChangePasswordSerializer,GetUsers,allinfo
 from .models import Users
 
 
@@ -139,4 +140,10 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     
     def post(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class AllviewP(viewsets.ModelViewSet):
+    serializer_class = allinfo
+    queryset = Users.objects.all()
+
 

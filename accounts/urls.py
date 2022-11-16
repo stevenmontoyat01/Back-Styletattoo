@@ -1,7 +1,11 @@
 from . import views
 from django.urls import path,include
-from .views import ChangePasswordView
+from .views import ChangePasswordView,AllviewP
+from rest_framework import routers
 
+
+router = routers.DefaultRouter()
+router.register("TattoList",AllviewP )
 
 
 urlpatterns = [
@@ -11,5 +15,7 @@ urlpatterns = [
      path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
      path("api/getUsers/",views.UserRetrieveAPIView.as_view(),name='getUsers' ),
      path("allUsers/", views.ProfileTCreateList.as_view(), name="ProfileTCreateList" ),
+     path("listTattoo/", include(router.urls))
+
 
 ]
