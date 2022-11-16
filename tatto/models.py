@@ -5,9 +5,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class Tattoo_artist (models.Model):
-    nameArtistic = models.CharField(max_length=50)
     img = models.TextField(max_length=150)
     create = models.DateTimeField(auto_now_add=True)
+    like = models.TextField(max_length=150)
     departament = models.TextField(max_length=150)
     municipio = models.TextField(max_length=150)
     direction = models.TextField(max_length=150)
