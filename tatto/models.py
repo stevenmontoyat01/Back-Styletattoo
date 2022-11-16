@@ -14,6 +14,6 @@ class Tattoo_artist (models.Model):
     description=models.TextField(max_length=150)
     artist = models.ForeignKey(User, on_delete=models.CASCADE, related_name="PerfilProfesional")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (self.nameArtistic)
     

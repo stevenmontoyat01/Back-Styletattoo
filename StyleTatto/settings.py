@@ -110,9 +110,9 @@ WSGI_APPLICATION = "styletatto.wsgi.application"
 DATABASES = {
     'default': dj_database_url.config(
         #Dairon
-    #   default = 'mysql://root:123456@localhost:3306/styletattoo',  
+       default = 'mysql://root:123456@localhost:3306/styletattoo',  
         #Steven
-        default = 'mysql://root:@localhost:3306/styletattoo',
+        #default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
     )
 }

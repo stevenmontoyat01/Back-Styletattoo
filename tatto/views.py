@@ -22,7 +22,7 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
     def perform_create(self,serializer):
         user = self.request.user
-        serializer.save(artist = user)
+        serializer.save(artist=user)
         return super().perform_create(serializer)
 
     def get(self, request: Request, *args, **kwargs):
@@ -52,6 +52,7 @@ class ProfileTUoploadteAndDelete(generics.GenericAPIView, mixins.RetrieveModelMi
 
 
 @api_view(http_method_names=["GET"])
+@permission_classes([IsAuthenticated])
 def perfilProfesional(request: Request):
 
     user= request.user 

@@ -8,6 +8,7 @@ from rest_framework import status
 
 from .models import Users
 
+from tatto.serializers import PostArtist
 
 from rest_framework import serializers
 
@@ -61,9 +62,10 @@ class GetUsers(serializers.ModelSerializer):
         fields = '__all__'
 
 class CurrentUserTattoSerializer(serializers.ModelSerializer):
-    PerfilProfesional = serializers.StringRelatedField(many = True)
+    PerfilProfesional = PostArtist(many=True)
 
     class Meta:
         model = Users
-        fields = '__all__'
+        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
+
 
