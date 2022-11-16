@@ -77,6 +77,6 @@ class allinfo(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
+        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
 
 
