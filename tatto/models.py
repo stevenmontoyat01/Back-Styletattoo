@@ -7,7 +7,7 @@ User = get_user_model()
 class Tattoo_artist (models.Model):
     img = models.TextField(max_length=150)
     create = models.DateTimeField(auto_now_add=True)
-    like = models.TextField(max_length=150)
+    like = models.IntegerField(max_length=150)
     departament = models.TextField(max_length=150)
     municipio = models.TextField(max_length=150)
     direction = models.TextField(max_length=150)
