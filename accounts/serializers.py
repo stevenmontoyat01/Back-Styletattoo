@@ -66,10 +66,12 @@ class GetUsers(serializers.ModelSerializer):
 
 class CurrentUserTattoSerializer(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
+    Portafolio = PostPortafolio(many=True)
+
 
     class Meta:
         model = Users
-        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
+        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio']
 
 
 
