@@ -9,6 +9,8 @@ from rest_framework import status
 from .models import Users
 
 from tatto.serializers import PostArtist
+from Portafolio.serializers import PostPortafolio
+
 
 from rest_framework import serializers
 
@@ -71,12 +73,16 @@ class CurrentUserTattoSerializer(serializers.ModelSerializer):
 
 
 
-
 class allinfo(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
+    Portafolio = PostPortafolio(many=True)
 
     class Meta:
         model = Users
-        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional']
+        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio']
+
+
+
+
 
 

@@ -131,6 +131,8 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 
+
+
 class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,):
     serializer_class = GetUsers
     queryset = Users.objects.all()
