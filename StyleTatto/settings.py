@@ -193,7 +193,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Administrador StyleTattoo",
 
     # Copyright on the footer
-    "copyright": "STYLE TATTO",
+    "copyright": "StyleTattoo",
 
     # El administrador del modelo para buscar desde la barra de búsqueda, 
     # la barra de búsqueda se omite si se excluye

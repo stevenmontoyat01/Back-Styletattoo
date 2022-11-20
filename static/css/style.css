@@ -3,10 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,500&display=swap');
 
 
-body{
-    font-family:'IBM Plex Serif'; ;
+html,body{
+    font-family: Rajdhani,sans-serif;
+
+
  
 }
+
+
+.brand-text{font-size: 13px;}
 
 #content-related{visibility: hidden;}
 .accent-primary a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link):not(.page-link):not(.btn){color: gray;}
@@ -19,3 +24,8 @@ body{
 .main-sidebar{background-color: #000;}
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {background-color: #161616;color: #fff;}
 .d-block{color: #ffff; text-transform:uppercase; }
+
+
+.float-right,card-header{
+    visibility: hidden;
+}

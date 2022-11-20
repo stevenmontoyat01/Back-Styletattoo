@@ -34,7 +34,12 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
 
 
-class ProfileTUoploadteAndDelete(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,  mixins.DestroyModelMixin ):
+class ProfileTUoploadteAndDelete(
+    generics.GenericAPIView, 
+    mixins.RetrieveModelMixin, 
+    mixins.UpdateModelMixin,):
+
+
     serializer_class = PostArtist
     queryset = Tattoo_artist.objects.all()
 
@@ -44,6 +49,11 @@ class ProfileTUoploadteAndDelete(generics.GenericAPIView, mixins.RetrieveModelMi
     
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+    
+    def delete(self, request: Request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+    
+    
 
 
 
