@@ -7,7 +7,6 @@ User = get_user_model()
 class Tattoo_artist (models.Model):
     img = models.TextField(max_length=150)
     create = models.DateTimeField(auto_now_add=True)
-    like = models.IntegerField()
     departament = models.TextField(max_length=150)
     municipio = models.TextField(max_length=150)
     direction = models.TextField(max_length=150)
@@ -16,6 +15,6 @@ class Tattoo_artist (models.Model):
     artist = models.ForeignKey(User, on_delete=models.CASCADE, related_name="PerfilProfesional")
 
     def __str__(self) -> str:
-        return (self.id    )
+        return (self.id)
     
 
