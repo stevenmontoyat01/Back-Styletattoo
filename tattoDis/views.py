@@ -37,6 +37,7 @@ class disponibilidadModelViewCreateList(generics.GenericAPIView, mixins.ListMode
 
 class disponibilidadModelUoploadteAndDelete(
     generics.GenericAPIView, 
+    mixins.ListModelMixin,
     mixins.RetrieveModelMixin, 
     mixins.UpdateModelMixin,):
 
