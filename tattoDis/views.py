@@ -8,24 +8,25 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,APIView,permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import PostArtist
-from .models import Tattoo_artist
+from .serializers import PostDisponibilidad
+from .models import disponibilidadModel
 
 from accounts.serializers import CurrentUserTattoSerializer
 from django.shortcuts import get_object_or_404
 
 
-class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    serializer_class = PostArtist
-    queryset = Tattoo_artist.objects.all()
+class disponibilidadModelViewCreateList(generics.GenericAPIView, mixins.ListModelMixin,mixins.CreateModelMixin):
+    serializer_class = PostDisponibilidad
+    queryset = disponibilidadModel.objects.all()
 
     def perform_create(self,serializer):
         user = self.request.user
-        serializer.save(artist=user)
+        serializer.save(iDispo=user)
         return super().perform_create(serializer)
 
     def get(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+    
     
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -34,14 +35,14 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
 
 
-class ProfileTUoploadteAndDelete(
+class disponibilidadModelUoploadteAndDelete(
     generics.GenericAPIView, 
     mixins.RetrieveModelMixin, 
     mixins.UpdateModelMixin,):
 
 
-    serializer_class = PostArtist
-    queryset = Tattoo_artist.objects.all()
+    serializer_class = PostDisponibilidad
+    queryset = disponibilidadModel.objects.all()
 
 
     def get(self, request: Request, *args, **kwargs):
@@ -50,25 +51,7 @@ class ProfileTUoploadteAndDelete(
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
     
-    def delete(self, request: Request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-    
-    
 
-
-
-
-
-
-@api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])
-def perfilProfesional(request: Request):
-
-    user= request.user 
-
-    serializer = CurrentUserTattoSerializer(instance=user)
-
-    return Response(data= serializer.data, status=status.HTTP_200_OK)
 
 
 

@@ -29,6 +29,9 @@ class PortafolioViewCreateList(generics.GenericAPIView, mixins.ListModelMixin, m
     
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+    
+    def post(self, request: Request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 
@@ -37,7 +40,6 @@ class PortafolioViewCreateList(generics.GenericAPIView, mixins.ListModelMixin, m
 class PortafolioUoploadteAndDelete(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,  mixins.DestroyModelMixin ):
     serializer_class = PostPortafolio
     queryset = portafolio.objects.all()
-
 
     def get(self, request: Request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

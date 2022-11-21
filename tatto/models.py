@@ -16,6 +16,6 @@ class Tattoo_artist (models.Model):
     artist = models.ForeignKey(User, on_delete=models.CASCADE, related_name="PerfilProfesional")
 
     def __str__(self) -> str:
-        return (self.img)
+        return (self.id    )
     
 
