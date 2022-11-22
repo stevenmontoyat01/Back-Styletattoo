@@ -65,6 +65,12 @@ class GetUsers(serializers.ModelSerializer):
         model = Users
         fields = '__all__'
 
+class UpdateUsers(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields= ['first_name', 'last_name','image']
+
+
 
 class CurrentUserTattoSerializer(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)

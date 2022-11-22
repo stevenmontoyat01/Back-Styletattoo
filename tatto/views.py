@@ -35,8 +35,8 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
 
 class ProfileTUoploadteAndDelete(
-    generics.GenericAPIView, 
-    mixins.RetrieveModelMixin, 
+    generics.GenericAPIView,
+    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,):
 
 
