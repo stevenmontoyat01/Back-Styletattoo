@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from django.views import View
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-import json
+from rest_framework import status,generics,mixins
+from rest_framework.response import Response
+from rest_framework.request import Request
+
+from .serializer import *
+from .models import *
+
+
 
 # Create your views here.
 
@@ -10,68 +13,37 @@ import json
 #-----------------------API CITAS METHODS GET POST PUT DELETE-------------------------------#
 #-------------------------------------------------------------------------------------------#
 
-class QuotesView(View): 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+
+
+class ViewsQuotes(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,):
+    serializer_class = RegisterQuotes
+    queryset = Quotes.objects.all()
     
-#-----METHOD GET------#
-    def get(self, request, id=0):
-        if (id>0):
-            quotes=list(Quotes.objects.filter(Id_quotes=id).values())
-            if len(quotes) > 0:
-                quote=quotes[0]
-                datos = {'message': 'Sucess', 'quote':quote}
-            else:
-                datos = {'message': "Quotes not found..."}
-            return JsonResponse(datos)
-        else:
-            quotes=list(Quotes.objects.values())
-            if len(quotes)>0:
-                datos={'message':"success", 'quotes':quotes}
-            else:
-                datos={'message':"quotes not found..."}
-            return JsonResponse(datos)
-        
-#-----METHOD POST------#
-    def post (self, request):
-        jd=json.loads(request.body)
-        # print(jd)
-        Quotes.objects.create(Id_quotes=jd['Id_quotes'],
-                              Tattoo_artist_id=jd['Tattoo_artist_id'],
-                              User_id=jd['User_id'],
-                              Date=jd['Date'],
-                              Time=jd['Time'],
-                              Img=jd['Img'],
-                              Description=jd['Description'])
-        datos={'message':"success"}
-        return JsonResponse(datos)
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
     
-#-----METHOD PUT------#
-    def put(self, request, id):
-        jd=json.loads(request.body)
-        quotes=list(Quotes.objects.filter(Id_quotes=id).values())
-        if len(quotes) > 0:
-            quote=Quotes.objects.get(Id_quotes=id)
-            quote.Id_quotes=jd['Id_quotes']
-            quote.Tattoo_artist_id=jd['Tattoo_artist_id']
-            quote.User_id=jd['User_id']
-            quote.Date=jd['Date']
-            quote.Time=jd['Time']
-            quote.Img=jd['Img']
-            quote.Description=jd['Description']
-            quote.save()
-            datos={'message':"success"}
-        else:
-            datos={'message':"quote removed successfully..."}
-        return JsonResponse(datos)
-    
-#-----METHOD DELETE------#
-    def delete(self, request, id):
-        quotes=list(Quotes.objects.filter(Id_quotes=id).values())
-        if len(quotes) > 0:
-            Quotes.objects.filter(Id_quotes=id).delete()
-            datos={'message':"success"}
-        else:
-            datos={'message':"quotes not found..."}
-        return JsonResponse(datos)
+    def post(self, request: Request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+
+
+# class ViewsQuotes(generics.GenericAPIView):
+#     permission_classes = []
+#     serializer_class = RegisterQuotes
+
+#     def post(self, request:Request):
+#         data = request.data
+#         serializer = self.serializer_class(data=data)
+
+
+#         if serializer.is_valid():
+#             serializer.save()
+#             response = {
+#                 "massage":"cita registrada",
+#                 "data" : serializer.data
+#             }
+
+#             return Response (data=response, status= status.HTTP_201_CREATED)
+
+#         return Response (data=serializer.errors, status= status.HTTP_201_CREATED)
