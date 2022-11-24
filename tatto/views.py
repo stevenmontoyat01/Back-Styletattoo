@@ -15,7 +15,7 @@ from accounts.serializers import CurrentUserTattoSerializer
 from django.shortcuts import get_object_or_404
 
 
-class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,):
+class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
     serializer_class = PostArtist
     queryset = Tattoo_artist.objects.all()
 
@@ -35,8 +35,8 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
 
 
 class ProfileTUoploadteAndDelete(
-    generics.GenericAPIView, 
-    mixins.RetrieveModelMixin, 
+    generics.GenericAPIView,
+    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,):
 
 
@@ -45,13 +45,10 @@ class ProfileTUoploadteAndDelete(
 
 
     def get(self, request: Request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
+        return self.list(request, *args, **kwargs)
     
     def put(self, request: Request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-    
-    def delete(self, request: Request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
     
     
 

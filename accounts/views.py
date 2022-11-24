@@ -14,7 +14,7 @@ from rest_framework import viewsets
 # Create your views here.
 from django.views.generic import View
 from rest_framework.generics import RetrieveAPIView
-from .serializers import ChangePasswordSerializer,GetUsers,allinfo
+from .serializers import ChangePasswordSerializer,GetUsers,allinfo,UpdateUsers
 from .models import Users
 
 
@@ -133,7 +133,10 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 
-class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,):
+class ProfileTCreateList(generics.GenericAPIView,
+mixins.ListModelMixin,
+mixins.CreateModelMixin,
+mixins.UpdateModelMixin,):
     serializer_class = GetUsers
     queryset = Users.objects.all()
 
@@ -142,6 +145,15 @@ class ProfileTCreateList(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     
     def post(self, request: Request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class userUpdate(generics.GenericAPIView, mixins.UpdateModelMixin,):
+    serializer_class = UpdateUsers
+    queryset = Users.objects.all()
+
+    def put(self, request: Request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
 
 
 class AllviewP(viewsets.ModelViewSet):

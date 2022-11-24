@@ -9,6 +9,8 @@ from rest_framework import status
 from .models import Users
 
 from tatto.serializers import PostArtist
+from tattoDis.serializers import PostDisponibilidad
+
 from Portafolio.serializers import PostPortafolio
 
 
@@ -63,25 +65,35 @@ class GetUsers(serializers.ModelSerializer):
         model = Users
         fields = '__all__'
 
+class UpdateUsers(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields= ['first_name', 'last_name','image']
+
+
 
 class CurrentUserTattoSerializer(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
     Portafolio = PostPortafolio(many=True)
+    iDispo = PostDisponibilidad(many=True)
+
 
 
     class Meta:
         model = Users
-        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio']
+        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio','iDispo']
 
 
 
 class allinfo(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
     Portafolio = PostPortafolio(many=True)
+    iDispo = PostDisponibilidad(many=True)
+
 
     class Meta:
         model = Users
-        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio']
+        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio', 'iDispo']
 
 
 
