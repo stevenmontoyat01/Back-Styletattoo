@@ -30,14 +30,45 @@ class DeleteQuotes(generics.GenericAPIView, mixins.ListModelMixin, mixins.Create
     serializer_class = DeleteQuotes
     queryset = Quotes.objects.all()
 
-    def get(self, request: Request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+    def get(self, request: Request, id):
+
+        quote = Quotes.objects.filter(id_quotes= id).first()
+
+        if quote == None :
+            request = {
+            "response":"cita no encontrada"
+            }
+
+            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
+
+        request = {
+            "response":"cita encontrada",
+            "quotes" : {
+                "id_quote": quote.id_quotes,
+                "date" : quote.date,
+                "time" : quote.time,
+                "img" : quote.img,
+                "description" : quote.description,
+                "user" : quote.userID.__str__(),
+                "artist_tatoo": quote.artist_tattoo.__str__(),
+                "isActive" : quote.isActive
+            }
+        }
+        return Response(data=request, status=status.HTTP_200_OK)
+        
 
     def delete(self,request:Request, id):
 
         print(request.data)
 
         quote = Quotes.objects.filter(id_quotes= id).first()
+        if quote == None :
+
+            request = {
+            "response":"cita no encontrada"
+            }
+            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
+
         quote.delete()
 
         request = {
