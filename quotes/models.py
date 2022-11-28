@@ -16,6 +16,7 @@ class Quotes(models.Model):
     description = models.CharField(max_length=150, blank=False, default='')
     userID = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="perfilUser")
     artist_tattoo = models.ForeignKey(Users, on_delete=models.CASCADE, related_name= "perfilTattoo")
+    isActive = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return self.id_quotes

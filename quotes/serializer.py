@@ -13,7 +13,7 @@ from .models import Quotes
 class RegisterQuotes(serializers.ModelSerializer):
     class Meta:
         model = Quotes
-        fields = '__all__' 
+        fields = ['date','time','img','description','userID','artist_tattoo']
 
 
 
@@ -28,4 +28,9 @@ class RegisterQuotes(serializers.ModelSerializer):
 #     class Meta:
 #         model = Quotes
 #         fields = ['date','img','time','description','artist_tattoo','user',]
+
+class DeleteQuotes(serializers.ModelSerializer):
+    class Meta:
+        model = Quotes
+        fields = '__all__'
         

@@ -113,7 +113,7 @@ DATABASES = {
         #Dairon
         #default = 'mysql://root:123456@localhost:3306/styletattoo',  
         #Steven
-        #default = 'mysql://root:@localhost:3306/styletattoo',
+        default = 'mysql://root:@localhost:3306/styletattoo',
         conn_max_age = 6007
     )
 }
