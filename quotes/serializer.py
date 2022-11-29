@@ -15,22 +15,22 @@ class RegisterQuotes(serializers.ModelSerializer):
         model = Quotes
         fields = ['date','time','img','description','userID','artist_tattoo']
 
-
-
-# class RegisterQuotes(serializers.ModelSerializer):
-#     date = serializers.DateField()
-#     time = serializers.TimeField()
-#     img = serializers.CharField(max_length = 100)
-#     description = serializers.CharField(max_length = 150)
-#     artist_tattoo = serializers.IntegerField()
-#     user = serializers.IntegerField()
-
-#     class Meta:
-#         model = Quotes
-#         fields = ['date','img','time','description','artist_tattoo','user',]
-
 class DeleteQuotes(serializers.ModelSerializer):
     class Meta:
         model = Quotes
         fields = '__all__'
+
+
+class UpdateQuotes(serializers.ModelSerializer):
+    isActive = serializers.BooleanField()
+    class Meta:
+        model = Quotes
+        fields = ['isActive']
+
+    def update(self, instance, validated_data):
+        instance.isActive = validated_data.get('isActive',instance.isActive)
+        instance.save()
+        return instance
+
+        
         
