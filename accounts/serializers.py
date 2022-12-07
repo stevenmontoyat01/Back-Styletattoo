@@ -10,8 +10,8 @@ from .models import Users
 
 from tatto.serializers import PostArtist
 from tattoDis.serializers import PostDisponibilidad
-
 from Portafolio.serializers import PostPortafolio
+from quotes.serializer import RegisterQuotes
 
 
 from rest_framework import serializers
@@ -55,6 +55,12 @@ class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
 
+
+
+
+
+
+
 class GetInformation(serializers.Serializer):
     model = (Users)
 
@@ -76,12 +82,16 @@ class CurrentUserTattoSerializer(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
     Portafolio = PostPortafolio(many=True)
     iDispo = PostDisponibilidad(many=True)
+    perfilTattoo = RegisterQuotes(many=True)
+    perfilUser = RegisterQuotes(many=True)
+
+
 
 
 
     class Meta:
         model = Users
-        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio','iDispo']
+        fields= ['username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio','iDispo','perfilTattoo','perfilUser',]
 
 
 
@@ -89,11 +99,13 @@ class allinfo(serializers.ModelSerializer):
     PerfilProfesional = PostArtist(many=True)
     Portafolio = PostPortafolio(many=True)
     iDispo = PostDisponibilidad(many=True)
+    perfilTattoo = RegisterQuotes(many=True)
+    perfilUser = RegisterQuotes(many=True)
 
 
     class Meta:
         model = Users
-        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio', 'iDispo']
+        fields= ['id','username','first_name', 'last_name','email','rol','is_active','image','PerfilProfesional','Portafolio', 'iDispo','perfilTattoo','perfilUser',]
 
 
 

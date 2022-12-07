@@ -58,7 +58,7 @@ class Users(AbstractUser):
 
 
     def __str__(self):
-        return "{} {}".format(self.first_name,self.last_name)
+        return self.username
 
 
 @receiver(reset_password_token_created)

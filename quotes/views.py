@@ -26,118 +26,93 @@ class ViewsQuotes(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateM
     def post(self, request: Request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-class DeleteQuotes(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    serializer_class = DeleteQuotes
+    def delete(self, request: Request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+
+
+class DeleteQuotes(generics.GenericAPIView,mixins.RetrieveModelMixin,mixins.DestroyModelMixin,):
+    serializer_class = RegisterQuotes
     queryset = Quotes.objects.all()
 
-    def get(self, request: Request, id):
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-        quote = Quotes.objects.filter(id_quotes= id).first()
+    
+    def delete(self, request: Request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
-        if quote == None :
-            request = {
-            "response":"cita no encontrada"
-            }
 
-            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
 
-        request = {
-            "response":"cita encontrada",
-            "quotes" : {
-                "id_quote": quote.id_quotes,
-                "date" : quote.date,
-                "time" : quote.time,
-                "img" : quote.img,
-                "description" : quote.description,
-                "user" : quote.userID.__str__(),
-                "artist_tatoo": quote.artist_tattoo.__str__(),
-                "isActive" : quote.isActive
-            }
-        }
-        return Response(data=request, status=status.HTTP_200_OK)
-        
-
-    def delete(self,request:Request, id):
-
-        quote = Quotes.objects.filter(id_quotes= id).first()
-        if quote == None :
-
-            request = {
-            "response":"cita no encontrada"
-            }
-            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
-
-        quote.delete()
-
-        request = {
-            "response":"cita eliminada exitosamente"
-        }
-
-        return Response (data=request, status=status.HTTP_200_OK)
-
-class UpdateQuotes(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixin):
-
+class UpdateQuotes(generics.GenericAPIView,mixins.RetrieveModelMixin,mixins.UpdateModelMixin):
     serializer_class = UpdateQuotes
     queryset = Quotes.objects.all()
 
-    def get(self, request: Request, id):
-
-        quote = Quotes.objects.filter(id_quotes= id).first()
-
-        if quote == None :
-            request = {
-            "response":"cita no encontrada"
-            }
-
-            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
-
-        request = {
-            "response":"cita encontrada",
-            "quotes" : {
-                "id_quote": quote.id_quotes,
-                "date" : quote.date,
-                "time" : quote.time,
-                "img" : quote.img,
-                "description" : quote.description,
-                "user" : quote.userID.__str__(),
-                "artist_tatoo": quote.artist_tattoo.__str__(),
-                "isActive" : quote.isActive
-            }
-        }
-        return Response(data=request, status=status.HTTP_200_OK)
-
-    def put(self, request :Request, id):
-
-        quote = Quotes.objects.filter(id_quotes= id).first()
-        serializer = self.serializer_class(instance=quote, data= request.data)
-
-        if quote == None:
-
-            request = {
-            "response":"cita no encontrada"
-            }
-
-            return Response (data=request, status=status.HTTP_404_NOT_FOUND)
-
-        if serializer.is_valid():
-
-            serializer.save()
-
-            request = {
-                "response" : "cita actualizada",
-                "cita info" : {
-                    "id_quotes" : quote.id_quotes,
-                    "is_active" : quote.isActive
-                }
-            }
-            
-            return Response(data=request, status=status.HTTP_200_OK)
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+    def put(self, request: Request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
 
 
 
-    # def delete(self, request: Request, *args, **kwargs):
-    #     return self.delete(request, *args, **kwargs)
+
+# class DeleteQuotes(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+#     serializer_class = RegisterQuotes
+#     queryset = Quotes.objects.all()
+
+#     def get(self, request: Request, id):
+
+#         quote = Quotes.objects.filter(id_quotes= id).first()
+
+#         if quote == None :
+#             request = {
+#             "response":"cita no encontrada"
+#             }
+
+#             return Response (data=request, status=status.HTTP_404_NOT_FOUND)
+
+#         request = {
+#             "response":"cita encontrada",
+#             "quotes" : {
+#                 "id_quote": quote.id_quotes,
+#                 "date" : quote.date,
+#                 "time" : quote.time,
+#                 "img" : quote.img,
+#                 "description" : quote.description,
+#                 "user" : quote.userID.__str__(),
+#                 "artist_tatoo": quote.artist_tattoo.__str__(),
+#                 "isActive" : quote.isActive
+#             }
+#         }
+#         return Response(data=request, status=status.HTTP_200_OK)
+        
+
+#     def delete(self,request:Request, id):
+
+#         print(request.data)
+
+#         quote = Quotes.objects.filter(id_quotes= id).first()
+#         if quote == None :
+
+#             request = {
+#             "response":"cita no encontrada"
+#             }
+#             return Response (data=request, status=status.HTTP_404_NOT_FOUND)
+
+#         quote.delete()
+
+#         request = {
+#             "response":"cita eliminada exitosamente"
+#         }
+
+#         return Response (data=request, status=status.HTTP_200_OK)
+
+
+#     def delete(self, request: Request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
+
 
 # class ViewsQuotes(generics.GenericAPIView):
 #     permission_classes = []
