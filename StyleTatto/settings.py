@@ -107,15 +107,27 @@ WSGI_APPLICATION = "styletatto.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+#Database railway
+#mysql://root:v68AOeRQmfJ74OgjpjGF@containers-us-west-144.railway.app:7992/railway
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         #Dairon
+#         default = 'mysql://root:123456@localhost:3306/styletattoo',  
+#         #Steven
+#         #default = 'mysql://root:@localhost:3306/styletattoo',
+#         conn_max_age = 6007
+#     )
+# }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        #Dairon
-        default = 'mysql://root:123456@localhost:3306/styletattoo',  
-        #Steven
-        #default = 'mysql://root:@localhost:3306/styletattoo',
-        conn_max_age = 6007
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'v68AOeRQmfJ74OgjpjGF',
+        'HOST': 'containers-us-west-144.railway.app',
+        'PORT': '7992',
+    }
 }
 
 
