@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'colorfield',
-    'django_rest_passwordreset',
-
+    'django_rest_passwordreset'
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
